@@ -1,4 +1,3 @@
-console.log(KEY)
 
 // Start Quotes Section
 
@@ -42,6 +41,7 @@ qoutesxhr.send();
 // End Quotes Section
 
 // Start Books Section
+const key = 'AIzaSyDOEa3KwP6_wmN4JNjNxL1rkl2kRZwqkzk';
 let url = `https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=${key}&&maxResults=40`
 
 let xhr = new XMLHttpRequest()
