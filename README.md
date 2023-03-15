@@ -12,7 +12,6 @@ Booky is an application specially built to find your favourite books info. This 
 You can see our demo website [Here](https://gsgg13.github.io/Booky/).
 
 
-
 ---
 
 
