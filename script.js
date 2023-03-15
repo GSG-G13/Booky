@@ -1,3 +1,5 @@
+// Start Quotes Section
+
 let qoutesUrl = `https://api.quotable.io/quotes`;
 
 let qoutesxhr = new XMLHttpRequest();
@@ -35,8 +37,11 @@ const quotesDomElements = (quote) => {
 qoutesxhr.open("GET", qoutesUrl, true);
 qoutesxhr.send();
 
+// End Quotes Section
+
 // Start Books Section
-let url = `https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=${key}`
+const key = 'AIzaSyDOEa3KwP6_wmN4JNjNxL1rkl2kRZwqkzk';
+let url = `https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=${key}&&maxResults=40`
 
 let xhr = new XMLHttpRequest()
 
@@ -45,13 +50,14 @@ let booksContainer = document.querySelector('.books-container')
 xhr.onreadystatechange = () => {
   if (xhr.readyState === 4 && xhr.status === 200) {
     let data = JSON.parse(xhr.responseText)
-
-    console.log(data.items[10]);
+    let bookIndex = 0;
     data.items.forEach((book, i) => {
-      if (i !== 9) {
+      if (i < 9) {
         domElements(book)
+        bookIndex++
       }
     });
+    seeMoreFunc(data, bookIndex)
   }
 }
 
@@ -95,7 +101,7 @@ const domElements = (book) => {
   let col2 = document.createElement('div')
 
   let publishDate = document.createElement('p')
-  publishDate.textContent = book.volumeInfo.publishedDate.split('-').slice(0, 1)
+  publishDate.textContent = book.volumeInfo.publishedDate?.split('-').slice(0, 1) || 2005
 
   let publish = document.createElement('p')
   publish.textContent = 'Published'
@@ -105,7 +111,7 @@ const domElements = (book) => {
   let col3 = document.createElement('div')
 
   let categoryKind = document.createElement('p')
-  categoryKind.textContent = book.volumeInfo.categories[0].split(' ').slice(0, 1)
+  book.volumeInfo.categories?.length > 0 ? categoryKind.textContent = book.volumeInfo.categories[0].split(' ').slice(0, 1) || 'Science' : ''
 
   let category = document.createElement('p')
   category.textContent = 'Category'
@@ -122,7 +128,8 @@ const domElements = (book) => {
   let previewBtn = document.createElement('a')
   previewBtn.textContent = 'Preview'
   previewBtn.className = 'preview-btn'
-  previewBtn.href = book.volumeInfo.previewLink
+  previewBtn.href = book.volumeInfo.previewLink;
+  previewBtn.target = '_blank';
 
   bookData.appendChild(previewBtn)
 
@@ -133,10 +140,29 @@ const domElements = (book) => {
   bookContain.appendChild(bookContent)
 
   booksContainer.appendChild(bookContain)
+
+}
+
+const seeMoreFunc = (data, bookIndex) => {
+  let seeMoreBtn = document.createElement('button')
+  seeMoreBtn.textContent = 'See More'
+  seeMoreBtn.className = 'seemore-btn'
+  document.body.appendChild(seeMoreBtn)
+
+  seeMoreBtn.addEventListener('click', () => {
+    data.items.forEach((book, i, arr) => {
+      if (i < 6 && bookIndex < 39) {
+        domElements(arr[bookIndex])
+        bookIndex++
+        if (bookIndex === 39) {
+          seeMoreBtn.style.display = 'none'
+        }
+      }
+    })
+  })
 }
 
 xhr.open('Get', url, true)
 xhr.send()
 
 // End Books Section
-

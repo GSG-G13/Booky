@@ -11,7 +11,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(45deg, rgba(0, 150, 136, 1) 30%, rgba(5, 175, 93, 0.8436624649859944) 100%);
-
+    min-height: 100vh;
 }
 
 :root {
@@ -20,12 +20,34 @@ body {
 
 /* Start Header Section */
 .header {
-    background-image: url('https://img.freepik.com/premium-photo/wooden-table_36051-46.jpg?w=1060');
+    /* background-image: url('https://img.freepik.com/premium-photo/wooden-table_36051-46.jpg?w=1060');
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
-    height: 30vh;
+    background-repeat: no-repeat; */
+    height: 35vh;
     padding: 2rem;
+    position: relative;
+    background: #2c3e50;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    left: -0%;
+    top: 100%;
+    z-index: 10;
+    display: block;
+    height: 50px;
+    background-size: 50px 100%;
+    background-image: linear-gradient(135deg, #2c3e50 25%, transparent 25%), linear-gradient(225deg, #2c3e50 25%, transparent 25%);
+    background-position: 0 0;
+}
+
+@media (max-width: 500px) {
+    .header {
+        padding: 1rem;
+    }
 }
 
 @media (max-width: 500px) {
@@ -68,6 +90,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1rem;
+    margin-top: 3rem;
 }
 
 .qouts-container .quote {
@@ -81,33 +104,40 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #fff;
+
 }
-.qouts-container .quote .quote-content{
-font-size: 1.2rem;
+
+.quote:hover {
+    transform: translateY(-5px);
+    color: #333;
+    background-color: #fff;
+    background-color: #aadfac;
+
+}
+
+.qouts-container .quote .quote-content {
+    font-size: 1.2rem;
     font-style: italic;
 }
+
 .qouts-container .quote .quote-author {
     display: block;
     margin-top: 40px;
     text-align: center;
     margin-bottom: 20px;
     color: #555;
-}
-
-
-.quote:hover {
-    transform: translateY(5px);
-    color: #333;
-    background-color: #fff;
+    opacity: 0.5;
 }
 
 @media (max-width: 600px) {
     .qouts-container {
         grid-template-columns: auto;
     }
+
     .qouts-container .quote:nth-child(2),
     .qouts-container .quote:nth-child(3),
-    .qouts-container .quote:nth-child(4){
+    .qouts-container .quote:nth-child(4) {
         display: none;
         background-color: red;
     }
@@ -116,8 +146,9 @@ font-size: 1.2rem;
     .qouts-container {
         grid-template-columns: auto;
     }
+
     .qouts-container .quote:nth-child(3),
-    .qouts-container .quote:nth-child(4){
+    .qouts-container .quote:nth-child(4) {
         display: none;
     }
 }
@@ -126,7 +157,8 @@ font-size: 1.2rem;
     .qouts-container {
         grid-template-columns: auto auto auto;
     }
-    .qouts-container .quote:nth-child(4){
+
+    .qouts-container .quote:nth-child(4) {
         display: none;
     }
 }
@@ -140,7 +172,6 @@ font-size: 1.2rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1rem;
-    background: linear-gradient(45deg, rgba(0, 150, 136, 1) 30%, rgba(5, 175, 93, 0.8436624649859944) 100%);
 }
 
 @media (min-width: 1040px) {
@@ -157,7 +188,8 @@ font-size: 1.2rem;
     min-width: 300px;
     height: 180px;
     transition: 0.5s ease-in-out;
-    margin: 2rem auto;
+    margin: 2rem 1rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.35);
 }
 
 @media (max-width: 500px) {
@@ -274,6 +306,21 @@ font-size: 1.2rem;
     color: #fff;
     margin-bottom: 1rem;
     text-align: center;
+}
+
+.seemore-btn {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    width: 150px;
+    position: absolute;
+    position: relative;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* End Books Section */
