@@ -142,6 +142,7 @@ body {
         background-color: red;
     }
 }
+
 @media (max-width: 900px) {
     .qouts-container {
         grid-template-columns: auto;
@@ -165,6 +166,81 @@ body {
 
 /* End Quotes Section */
 
+/* Start Search Section */
+
+.searchBox {
+    position: relative;
+    background: #2f3640;
+    height: 50px;
+    border-radius: 40px;
+    padding: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin: 2rem auto;
+    cursor: pointer;
+}
+
+.searchBox:hover>.searchInput,
+.searchBox:focus>.searchInput {
+    width: 240px;
+    padding: 0 6px;
+}
+
+.searchButton {
+    color: white;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.searchBox:hover>.searchButton {
+    background: white;
+}
+
+.searchBox:hover>.searchButton svg {
+    fill: #2f3640;
+    cursor: pointer;
+}
+
+.searchInput {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    padding-left: 1rem;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media screen and (max-width: 620px) {
+    .searchBox {
+        max-width: 300px;
+    }
+
+    .searchBox:hover>.searchInput {
+        width: 150px;
+        padding: 0 6px;
+    }
+}
+
+/* End Search Section */
 /* Start Loading Section */
 .load{
     display: flex;

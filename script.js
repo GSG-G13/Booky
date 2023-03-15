@@ -43,9 +43,41 @@ qoutesxhr.send();
 const key = 'AIzaSyDOEa3KwP6_wmN4JNjNxL1rkl2kRZwqkzk';
 let url = `https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=${key}&&maxResults=40`
 
-let xhr = new XMLHttpRequest()
+// srart Search Section
 
 let booksContainer = document.querySelector('.books-container')
+
+
+const searchbox = document.querySelector('.searchBox');
+const searchbutton = document.querySelector(".searchButton");
+
+searchbox.addEventListener('submit', (e) => {
+  e.preventDefault()
+  const searchinput = document.querySelector(".searchInput");
+
+  console.log(searchinput.value);
+  let SearchUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchinput.value}+subject&&api_key=${key}`
+  
+  let xhrSearch = new XMLHttpRequest()
+
+  xhrSearch.onreadystatechange = () => {
+    if (xhrSearch.readyState == 4 && xhrSearch.status == 200) {
+      let data = JSON.parse(xhrSearch.responseText);
+      booksContainer.innerHTML = ''
+      data.items.forEach((book) => {
+        console.log(book);
+        domElements(book)
+      });
+    }
+  };
+  xhrSearch.open("GET", SearchUrl, true);
+  xhrSearch.send();
+})
+
+// End Search Section
+
+// Start Books Section
+
 
 // -Start Loading Animation
 function openLoader() {
@@ -56,6 +88,7 @@ function closeLoader() {
   document.querySelector('.load').style.display = 'none';
 }
 // -End Loading Animation
+let xhr = new XMLHttpRequest()
 
 xhr.onreadystatechange = () => {
   openLoader()
