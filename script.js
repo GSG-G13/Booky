@@ -39,8 +39,11 @@ qoutesxhr.send();
 
 // End Quotes Section
 
-// srart Search Section
+// Start Books Section
 const key = 'AIzaSyDOEa3KwP6_wmN4JNjNxL1rkl2kRZwqkzk';
+let url = `https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=${key}&&maxResults=40`
+
+// srart Search Section
 
 let booksContainer = document.querySelector('.books-container')
 
@@ -53,7 +56,7 @@ searchbox.addEventListener('submit', (e) => {
   const searchinput = document.querySelector(".searchInput");
 
   console.log(searchinput.value);
-  let url = `https://www.googleapis.com/books/v1/volumes?q=${searchinput.value}+subject&&api_key=${key}`
+  let SearchUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchinput.value}+subject&&api_key=${key}`
   
   let xhrSearch = new XMLHttpRequest()
 
@@ -67,47 +70,30 @@ searchbox.addEventListener('submit', (e) => {
       });
     }
   };
-  xhrSearch.open("GET", url, true);
+  xhrSearch.open("GET", SearchUrl, true);
   xhrSearch.send();
-}
+})
 
-)
-
-
-
-// const searches = document.querySelector(".searchBox");
-// const button = document.querySelector(".search-btn");
-// const container = document.querySelector(".search-results");
-// const limit_field = document.querySelector(".limit-query");
-// button.onclick = function () {
-//   let limit = limit_field.value || 1;
-//   let xhrSearch = new XMLHttpRequest();
-//   xhrSearch.onreadystatechange = function () {
-//     if (xhrSearch.readyState == 4 && xhrSearch.status == 200) {
-//       let searh = JSON.parse(xhr.responseText);
-//       console.log(giphyObj);
-//       giphyObj.data.forEach((item) => {
-//         let link = item.images.downsized_large.url;
-//         const img = document.createElement("img");
-//         img.setAttribute("src", " ");
-//         img.setAttribute("alt", "gif img");
-//         img.src = link;
-//         container.append(img);
-//       });
-//     }
-//   };
-//   xhr.open("GET", url, true);
-//   xhr.send();
-// };
 // End Search Section
 
 // Start Books Section
 
+
+// -Start Loading Animation
+function openLoader() {
+  document.querySelector('.load').style.display = 'flex';
+}
+
+function closeLoader() {
+  document.querySelector('.load').style.display = 'none';
+}
+// -End Loading Animation
 let xhr = new XMLHttpRequest()
-let url = `https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=${key}&&maxResults=40`
 
 xhr.onreadystatechange = () => {
+  openLoader()
   if (xhr.readyState === 4 && xhr.status === 200) {
+    closeLoader()
     let data = JSON.parse(xhr.responseText)
     let bookIndex = 0;
     data.items.forEach((book, i) => {
