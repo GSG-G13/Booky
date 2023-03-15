@@ -1,36 +1,142 @@
-let url = `https://api.quotable.io/quotes`;
-let xhr = new XMLHttpRequest();
-let quotsContainer = document.querySelector('.qouts-container')
-xhr.onreadystatechange = ()=> {
-  if (xhr.readyState == 4 && xhr.status == 200) {
-    let newdata = JSON.parse(xhr.responseText);
-    //console.log(newdata);
-    newdata.results.forEach((quot) => {
-        let quotContain = document.createElement('div')
-        quotContain.className = 'quot'
+let qoutesUrl = `https://api.quotable.io/quotes`;
 
-        let quotContent = document.createElement('h3')
-        quotContent.className = 'quot-content';
-        quotContent.textContent = quot.content;
-        //console.log(quotContent)
-        let quotAuther = document.createElement('p')
-        quotAuther.className = 'quot-author'
-        quotAuther.textContent = quot.author;
-       // console.log(quotAuther)
-        quotContain.appendChild(quotContent)
-        quotContain.appendChild(quotAuther)
+let qoutesxhr = new XMLHttpRequest();
+let quotesContainer = document.querySelector('.qouts-container')
+qoutesxhr.onreadystatechange = () => {
+  if (qoutesxhr.readyState == 4 && qoutesxhr.status == 200) {
+    let newdata = JSON.parse(qoutesxhr.responseText);
 
-        quotsContainer.appendChild(quotContain)
-
-        let randomNum =Math.floor(Math.random(quot.count-4));
-        console.log(randomNum);
-        newdata.slice(randomNum,randomNum+4)
-
+    let randomNum = Math.floor(Math.random() * (newdata.count - 4));
+    newdata.results.slice(randomNum, randomNum + 4).forEach((quote) => {
+      quotesDomElements(quote)
     });
 
-    
-     //return Math.floor(Math.random()-4);
+
   }
 };
-xhr.open("GET", url, true);
-xhr.send();
+
+const quotesDomElements = (quote) => {
+  let quoteContain = document.createElement('div')
+  quoteContain.className = 'quote'
+
+  let quoteContent = document.createElement('p') // #555
+  quoteContent.className = 'quote-content';
+  quoteContent.textContent = quote.content;
+  let quoteAuther = document.createElement('span') // #555 opacity: 0.5
+  quoteAuther.className = 'quote-author'
+  quoteAuther.textContent = quote.author;
+
+
+  quoteContain.appendChild(quoteContent)
+  quoteContain.appendChild(quoteAuther)
+  quotesContainer.appendChild(quoteContain)
+}
+
+qoutesxhr.open("GET", qoutesUrl, true);
+qoutesxhr.send();
+
+// Start Books Section
+let url = `https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=${key}`
+
+let xhr = new XMLHttpRequest()
+
+let booksContainer = document.querySelector('.books-container')
+
+xhr.onreadystatechange = () => {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    let data = JSON.parse(xhr.responseText)
+
+    console.log(data.items[10]);
+    data.items.forEach((book, i) => {
+      if (i !== 9) {
+        domElements(book)
+      }
+    });
+  }
+}
+
+const domElements = (book) => {
+  let bookContain = document.createElement('div')
+  bookContain.className = 'book'
+
+  let bookImgContain = document.createElement('div')
+  bookImgContain.className = 'book-banner'
+
+  let bookImg = document.createElement('img')
+  bookImg.src = book.volumeInfo.imageLinks.thumbnail;
+  bookImg.alt = book.volumeInfo.title;
+
+  bookImgContain.appendChild(bookImg)
+  bookContain.appendChild(bookImgContain)
+
+  let bookData = document.createElement('div')
+  bookData.className = 'book-data'
+
+  let bookTitle = document.createElement('h2')
+  bookTitle.textContent = book.volumeInfo.title;
+  bookData.appendChild(bookTitle)
+
+  let bookAuthor = document.createElement('p')
+  bookAuthor.textContent = book.volumeInfo.publisher || ' '
+  bookData.appendChild(bookAuthor)
+
+  let bookExtraData = document.createElement('div')
+  bookExtraData.className = 'book-extra-data'
+
+  let col1 = document.createElement('div')
+
+  let pagesCount = document.createElement('p')
+  pagesCount.textContent = book.volumeInfo.pageCount || 150
+  let pagesInfo = document.createElement('p')
+  pagesInfo.textContent = 'Pages'
+  col1.appendChild(pagesCount)
+  col1.appendChild(pagesInfo)
+
+  let col2 = document.createElement('div')
+
+  let publishDate = document.createElement('p')
+  publishDate.textContent = book.volumeInfo.publishedDate.split('-').slice(0, 1)
+
+  let publish = document.createElement('p')
+  publish.textContent = 'Published'
+  col2.appendChild(publishDate)
+  col2.appendChild(publish)
+
+  let col3 = document.createElement('div')
+
+  let categoryKind = document.createElement('p')
+  categoryKind.textContent = book.volumeInfo.categories[0].split(' ').slice(0, 1)
+
+  let category = document.createElement('p')
+  category.textContent = 'Category'
+  col3.appendChild(categoryKind)
+  col3.appendChild(category)
+
+
+  bookExtraData.appendChild(col1)
+  bookExtraData.appendChild(col2)
+  bookExtraData.appendChild(col3)
+
+  bookData.appendChild(bookExtraData)
+
+  let previewBtn = document.createElement('a')
+  previewBtn.textContent = 'Preview'
+  previewBtn.className = 'preview-btn'
+  previewBtn.href = book.volumeInfo.previewLink
+
+  bookData.appendChild(previewBtn)
+
+  let bookContent = document.createElement('div')
+  bookContent.className = 'book-content'
+
+  bookContent.appendChild(bookData)
+  bookContain.appendChild(bookContent)
+
+  booksContainer.appendChild(bookContain)
+}
+
+xhr.open('Get', url, true)
+xhr.send()
+
+// End Books Section
+
