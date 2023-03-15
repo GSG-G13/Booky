@@ -10,6 +10,8 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    background: linear-gradient(45deg, rgba(0, 150, 136, 1) 30%, rgba(5, 175, 93, 0.8436624649859944) 100%);
+
 }
 
 :root {
@@ -57,6 +59,79 @@ body {
 }
 
 /* End Header Section */
+
+/* Start Quotes Section */
+
+.qouts-container {
+    width: 100%;
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.qouts-container .quote {
+    color: #000;
+    background-color: #aadfac;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    transition: 0.2s;
+    cursor: pointer;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.qouts-container .quote .quote-content{
+font-size: 1.2rem;
+    font-style: italic;
+}
+.qouts-container .quote .quote-author {
+    display: block;
+    margin-top: 40px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+
+.quote:hover {
+    transform: translateY(5px);
+    color: #333;
+    background-color: #fff;
+}
+
+@media (max-width: 600px) {
+    .qouts-container {
+        grid-template-columns: auto;
+    }
+    .qouts-container .quote:nth-child(2),
+    .qouts-container .quote:nth-child(3),
+    .qouts-container .quote:nth-child(4){
+        display: none;
+        background-color: red;
+    }
+}
+@media (max-width: 900px) {
+    .qouts-container {
+        grid-template-columns: auto;
+    }
+    .qouts-container .quote:nth-child(3),
+    .qouts-container .quote:nth-child(4){
+        display: none;
+    }
+}
+
+@media (max-width: 1280px) {
+    .qouts-container {
+        grid-template-columns: auto auto auto;
+    }
+    .qouts-container .quote:nth-child(4){
+        display: none;
+    }
+}
+
+/* End Quotes Section */
 
 /* Start Books Section */
 

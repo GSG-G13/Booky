@@ -1,3 +1,40 @@
+let qoutesUrl = `https://api.quotable.io/quotes`;
+
+let qoutesxhr = new XMLHttpRequest();
+let quotesContainer = document.querySelector('.qouts-container')
+qoutesxhr.onreadystatechange = () => {
+  if (qoutesxhr.readyState == 4 && qoutesxhr.status == 200) {
+    let newdata = JSON.parse(qoutesxhr.responseText);
+
+    let randomNum = Math.floor(Math.random() * (newdata.count - 4));
+    newdata.results.slice(randomNum, randomNum + 4).forEach((quote) => {
+      quotesDomElements(quote)
+    });
+
+
+  }
+};
+
+const quotesDomElements = (quote) => {
+  let quoteContain = document.createElement('div')
+  quoteContain.className = 'quote'
+
+  let quoteContent = document.createElement('p') // #555
+  quoteContent.className = 'quote-content';
+  quoteContent.textContent = quote.content;
+  let quoteAuther = document.createElement('span') // #555 opacity: 0.5
+  quoteAuther.className = 'quote-author'
+  quoteAuther.textContent = quote.author;
+
+
+  quoteContain.appendChild(quoteContent)
+  quoteContain.appendChild(quoteAuther)
+  quotesContainer.appendChild(quoteContain)
+}
+
+qoutesxhr.open("GET", qoutesUrl, true);
+qoutesxhr.send();
+
 // Start Books Section
 let url = `https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=${key}`
 
