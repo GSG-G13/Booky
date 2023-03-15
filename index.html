@@ -16,37 +16,48 @@
     <!-- Start Header Section -->
 
     <Section class="header">
-        <a class="logo" href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                <path fill="none" d="M0 0h24v24H0z" />
-                <path
-                    d="M13 21v2h-2v-2H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6a3.99 3.99 0 0 1 3 1.354A3.99 3.99 0 0 1 15 3h6a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8zm7-2V5h-5a2 2 0 0 0-2 2v12h7zm-9 0V7a2 2 0 0 0-2-2H4v14h7z" />
-            </svg>
-            <h3>Book</h3>
-        </a>
-        <h2 class="desc">Welcome To Our Book App, Choose your Book And Start Reading</h2>
+        <div class="container">
+            <a class="logo" href="index.html">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path
+                        d="M13 21v2h-2v-2H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6a3.99 3.99 0 0 1 3 1.354A3.99 3.99 0 0 1 15 3h6a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8zm7-2V5h-5a2 2 0 0 0-2 2v12h7zm-9 0V7a2 2 0 0 0-2-2H4v14h7z" />
+                </svg>
+                <h3>Book</h3>
+            </a>
+            <h2 class="desc">Welcome To Our Book App, Choose your Book And Start Reading</h2>
+        </div>
     </Section>
 
     <!-- End Header Section -->
 
     <!-- Start Quotes Section -->
+
     <div class="qouts-container"></div>
+
     <!-- End Quotes Section -->
 
     <!-- start Search Section -->
-        <input type="text" class="search-query">
-        <input type="number" class="limit-query" placeholder="result count">
-        <button class="search-btn">Search</button>
-       <div class="search-results"></div>
-    
-     <!-- End Search Section -->
-    
-        <!-- Start Books Section -->
+
+    <form class="searchBox">
+
+        <input class="searchInput" type="text" name="" placeholder="Search">
+        <button type="submit" class="searchButton" href="#">
+            <svg fill="#fff" width="25" height="25" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path
+                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+            </svg>
+        </button>
+    </form>
+
+    <!-- End Search Section -->
+
+    <!-- Start Books Section -->
 
     <div class="books-container"></div>
 
     <!-- End Books Section -->
-
 </body>
 
 </html>
