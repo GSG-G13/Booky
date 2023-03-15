@@ -1,4 +1,3 @@
-
 // Start Quotes Section
 
 let qoutesUrl = `https://api.quotable.io/quotes`;

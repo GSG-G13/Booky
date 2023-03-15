@@ -50,6 +50,12 @@ body {
     }
 }
 
+@media (max-width: 500px) {
+    .header {
+        padding: 1rem;
+    }
+}
+
 .header .logo {
     text-decoration: none;
     display: flex;
@@ -136,7 +142,6 @@ body {
         background-color: red;
     }
 }
-
 @media (max-width: 900px) {
     .qouts-container {
         grid-template-columns: auto;
