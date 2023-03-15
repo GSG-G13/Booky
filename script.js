@@ -47,8 +47,20 @@ let xhr = new XMLHttpRequest()
 
 let booksContainer = document.querySelector('.books-container')
 
+// -Start Loading Animation
+function openLoader() {
+  document.querySelector('.load').style.display = 'flex';
+}
+
+function closeLoader() {
+  document.querySelector('.load').style.display = 'none';
+}
+// -End Loading Animation
+
 xhr.onreadystatechange = () => {
+  openLoader()
   if (xhr.readyState === 4 && xhr.status === 200) {
+    closeLoader()
     let data = JSON.parse(xhr.responseText)
     let bookIndex = 0;
     data.items.forEach((book, i) => {
