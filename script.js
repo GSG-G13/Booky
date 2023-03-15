@@ -1,26 +1,55 @@
+console.log(KEY)
+
+// Start Quotes Section
+
+let qoutesUrl = `https://api.quotable.io/quotes`;
+
+let qoutesxhr = new XMLHttpRequest();
+let quotesContainer = document.querySelector('.qouts-container')
+qoutesxhr.onreadystatechange = () => {
+  if (qoutesxhr.readyState == 4 && qoutesxhr.status == 200) {
+    let newdata = JSON.parse(qoutesxhr.responseText);
+
+    let randomNum = Math.floor(Math.random() * (newdata.count - 4));
+    newdata.results.slice(randomNum, randomNum + 4).forEach((quote) => {
+      quotesDomElements(quote)
+    });
+
+
+  }
+};
+
+const quotesDomElements = (quote) => {
+  let quoteContain = document.createElement('div')
+  quoteContain.className = 'quote'
+
+  let quoteContent = document.createElement('p') // #555
+  quoteContent.className = 'quote-content';
+  quoteContent.textContent = quote.content;
+  let quoteAuther = document.createElement('span') // #555 opacity: 0.5
+  quoteAuther.className = 'quote-author'
+  quoteAuther.textContent = quote.author;
+
+
+  quoteContain.appendChild(quoteContent)
+  quoteContain.appendChild(quoteAuther)
+  quotesContainer.appendChild(quoteContain)
+}
+
+qoutesxhr.open("GET", qoutesUrl, true);
+qoutesxhr.send();
+
+// End Quotes Section
+
 // Start Books Section
-// https://www.googleapis.com/books/v1/volumes?q=b&&api-key=AIzaSyDOEa3KwP6_wmN4JNjNxL1rkl2kRZwqkzk&&maxResults=40
-// let url = `https://www.googleapis.com/books/v1/volumes?q=b&&api-key=AIzaSyDOEa3KwP6_wmN4JNjNxL1rkl2kRZwqkzk&&maxResults=40`
-let url = 'https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=AIzaSyDOEa3KwP6_wmN4JNjNxL1rkl2kRZwqkzk&&maxResults=40'
-
-
-function openLoader() {
-  document.querySelector('.load').style.display = 'flex';
-}
-
-function closeLoader() {
-  document.querySelector('.load').style.display = 'none';
-}
-  
+let url = `https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=${key}&&maxResults=40`
 
 let xhr = new XMLHttpRequest()
 
 let booksContainer = document.querySelector('.books-container')
 
 xhr.onreadystatechange = () => {
-  openLoader()
   if (xhr.readyState === 4 && xhr.status === 200) {
-    closeLoader()
     let data = JSON.parse(xhr.responseText)
     let bookIndex = 0;
     data.items.forEach((book, i) => {
@@ -100,7 +129,8 @@ const domElements = (book) => {
   let previewBtn = document.createElement('a')
   previewBtn.textContent = 'Preview'
   previewBtn.className = 'preview-btn'
-  previewBtn.href = book.volumeInfo.previewLink
+  previewBtn.href = book.volumeInfo.previewLink;
+  previewBtn.target = '_blank';
 
   bookData.appendChild(previewBtn)
 
@@ -137,5 +167,3 @@ xhr.open('Get', url, true)
 xhr.send()
 
 // End Books Section
-
-search()
