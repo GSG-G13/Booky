@@ -36,6 +36,7 @@ qoutesxhr.open("GET", qoutesUrl, true);
 qoutesxhr.send();
 
 // Start Books Section
+let key = 'AIzaSyDOEa3KwP6_wmN4JNjNxL1rkl2kRZwqkzk'
 let url = `https://www.googleapis.com/books/v1/volumes?q=search+terms&&api-key=${key}`
 
 let xhr = new XMLHttpRequest()
